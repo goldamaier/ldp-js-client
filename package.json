@@ -1,0 +1,24 @@
+{
+  "name": "ldp-javascript-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nephi/ldp-js-client.git"
+  },
+  "keywords": [
+    "semantic",
+    "LDP",
+    "RDF"
+  ],
+  "author": "Golda Maier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Nephi/ldp-js-client/issues"
+  },
+  "homepage": "https://github.com/Nephi/ldp-js-client#readme"
+}
