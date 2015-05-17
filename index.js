@@ -4,26 +4,22 @@ var prompt = require('prompt');
 var properties = [
   {
     name: 'abstract',
-    description: 'abstract',
     pattern: /([a-zA-Z0-9])/,
     required: true
   },
   {
     name: 'name',
-    description: 'name',
     pattern: /([a-zA-Z0-9])/,
     required: true
 
   },
   {
     name: 'content',
-    description: 'content',
     pattern: /([a-zA-Z0-9])/,
     required: true
   },
   {
     name: 'slug',
-    description: 'slug',
     pattern: /([a-zA-Z0-9])/,
     default: 'FH Salzburg'
   }
