@@ -4,15 +4,28 @@ var prompt = require('prompt');
 var properties = [
   {
     name: 'abstract',
+    description: 'abstract',
+    pattern: /([a-zA-Z0-9])/,
+    required: true
   },
   {
     name: 'name',
+    description: 'name',
+    pattern: /([a-zA-Z0-9])/,
+    required: true
+
   },
   {
     name: 'content',
+    description: 'content',
+    pattern: /([a-zA-Z0-9])/,
+    required: true
   },
   {
     name: 'slug',
+    description: 'slug',
+    pattern: /([a-zA-Z0-9])/,
+    default: 'FH Salzburg'
   }
 ];
 console.log('los');
@@ -20,7 +33,7 @@ prompt.start();
 
 prompt.get(properties, function (err, result) {
   if (err) { return onErr(err); }
-  console.log('  abstract: ' + result.abstract);
+  console.log(result.abstract);
   console.log('  name: ' + result.name);
   console.log('  content: ' + result.content);
   console.log('  slug: ' + result.slug);
