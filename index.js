@@ -33,7 +33,7 @@ prompt.start();
 
 prompt.get(properties, function (err, result) {
   if (err) { return onErr(err); }
-  console.log(result.abstract);
+  console.log('  abstract:' + result.abstract);
   console.log('  name: ' + result.name);
   console.log('  content: ' + result.content);
   console.log('  slug: ' + result.slug);
@@ -83,7 +83,7 @@ function createPost(abstract, name, content, slug){
     method: 'POST',
     headers: {
       'Content-Type': 'application/ld+json',
-      'Slug':slug
+      'Slug': slug
       // 'Content-Length': postData.length
     }
   };
