@@ -30,8 +30,8 @@ var options = {
   path: '/ldp/FH-Salzburg',
   method: 'POST',
   headers: {
-    'Content-Type': 'application/ld-json',
-    'Slug':'hm'
+    'Content-Type': 'application/ld+json',
+    'Slug':'FH Salzburg'
     // 'Content-Length': postData.length
   }
 };
