@@ -1,54 +1,94 @@
 var http = require('http');
+var prompt = require('prompt');
 
-var postData = JSON.stringify({
-    "@id": "",
-    "@type": [
-      "http://rdfs.org/sioc/ns#Post",
-      "http://schema.org/Article"
-    ],
-    "http://purl.org/dc/terms/abstract": [
-      {
-        "@value": "Course on Semantic Web Technologies in the Summer Semester."
-      }
-    ],
-    "http://rdfs.org/sioc/ns#content": [
-      {
-        "@language": "en",
-        "@value": "..."
-      }
-    ],
-    "http://schema.org/name": [
-      {
-        "@value": "Funktioniert"
-      }
-    ]
-});
-
-var options = {
-  host: 'localhost',
-  port: 8080,
-  path: '/ldp/FH-Salzburg',
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/ld+json',
-    'Slug':'FH Salzburg'
-    // 'Content-Length': postData.length
+var properties = [
+  {
+    name: 'abstract',
+  },
+  {
+    name: 'name',
+  },
+  {
+    name: 'content',
+  },
+  {
+    name: 'slug',
   }
-};
+];
+console.log('los');
+prompt.start();
 
-var req = http.request(options, function(res) {
-  console.log('STATUS: ' + res.statusCode);
-  console.log('HEADERS: ' + JSON.stringify(res.headers));
-  res.setEncoding('utf8');
-  res.on('data', function (chunk) {
-    console.log('BODY: ' + chunk);
+prompt.get(properties, function (err, result) {
+  if (err) { return onErr(err); }
+  console.log('  abstract: ' + result.abstract);
+  console.log('  name: ' + result.name);
+  console.log('  content: ' + result.content);
+  console.log('  slug: ' + result.slug);
+
+  createPost(result.abstract, result.name, result.content, result.slug)
+});
+
+
+function onErr(err) {
+  console.log(err);
+  return 1;
+}
+
+
+//------------------------------------------------------
+
+function createPost(abstract, name, content, slug){
+
+  var postData = JSON.stringify({
+      "@id": "",
+      "@type": [
+        "http://rdfs.org/sioc/ns#Post",
+        "http://schema.org/Article"
+      ],
+      "http://purl.org/dc/terms/abstract": [
+        {
+          "@value": abstract
+        }
+      ],
+      "http://rdfs.org/sioc/ns#content": [
+        {
+          "@language": "en",
+          "@value": content
+        }
+      ],
+      "http://schema.org/name": [
+        {
+          "@value": name
+        }
+      ]
   });
-});
 
-req.on('error', function(e) {
-  console.log('problem with request: ' + e.message);
-});
+  var options = {
+    host: 'localhost',
+    port: 8080,
+    path: '/ldp/FH-Salzburg',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/ld+json',
+      'Slug':slug
+      // 'Content-Length': postData.length
+    }
+  };
 
-// write data to request body
-req.write(postData);
-req.end();
+  var req = http.request(options, function(res) {
+    console.log('STATUS: ' + res.statusCode);
+    console.log('HEADERS: ' + JSON.stringify(res.headers));
+    res.setEncoding('utf8');
+    res.on('data', function (chunk) {
+      console.log('BODY: ' + chunk);
+    });
+  });
+
+  req.on('error', function(e) {
+    console.log('problem with request: ' + e.message);
+  });
+
+  // write data to request body
+  req.write(postData);
+  req.end();
+}
