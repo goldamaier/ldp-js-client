@@ -1,18 +1,38 @@
 var http = require('http');
-var postData
 
-postData = JSON.stringify({
-  'msg' : 'Hello World!'
+var postData = JSON.stringify({
+    "@id": "",
+    "@type": [
+      "http://rdfs.org/sioc/ns#Post",
+      "http://schema.org/Article"
+    ],
+    "http://purl.org/dc/terms/abstract": [
+      {
+        "@value": "Course on Semantic Web Technologies in the Summer Semester."
+      }
+    ],
+    "http://rdfs.org/sioc/ns#content": [
+      {
+        "@language": "en",
+        "@value": "..."
+      }
+    ],
+    "http://schema.org/name": [
+      {
+        "@value": "Funktioniert"
+      }
+    ]
 });
 
 var options = {
-  host: 'postcatcher.in',
-  // port: 8080,
-  path: '/catchers/5558c4c2f90292030000627c',
+  host: 'localhost',
+  port: 8080,
+  path: '/ldp/FH-Salzburg',
   method: 'POST',
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Content-Length': postData.length
+    'Content-Type': 'application/ld-json',
+    'Slug':'hm'
+    // 'Content-Length': postData.length
   }
 };
 
