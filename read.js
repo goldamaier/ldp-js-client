@@ -6,7 +6,7 @@ var prompt = require('prompt');
 var properties = [
   {
     name: 'slug',
-    pattern: /([a-zA-Z0-9])/,
+    pattern: /([a-zA-Z0-9-])/,
     required: true
   }
 ];
