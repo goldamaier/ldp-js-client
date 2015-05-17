@@ -24,7 +24,7 @@ var properties = [
     default: 'FH Salzburg'
   }
 ];
-console.log('los');
+console.log('Please enter');
 prompt.start();
 
 prompt.get(properties, function (err, result) {

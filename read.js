@@ -1,7 +1,6 @@
 var http = require('http');
-var output = '';
-
 var prompt = require('prompt');
+var output = '';
 
 var properties = [
   {
@@ -11,7 +10,7 @@ var properties = [
   }
 ];
 
-console.log('los');
+console.log('Please enter ');
 prompt.start();
 
 prompt.get(properties, function (err, result) {
@@ -27,29 +26,28 @@ function onErr(err) {
   return 1;
 }
 
-
 //------------------------------------------------------
 
 function readPost(slug){
+  var options = {
+    hostname: 'localhost',
+    port: 8080,
+    path: '/ldp/FH-Salzburg/' + slug,
+  };
 
   http.get(options, function(res) {
     console.log("Got response: " + res.statusCode);
 
+  res.on('data', function(chunk){
+      output += chunk;
+    });
+
+    res.on('end', function() {
+      console.log(output);
+    });
 
   }).on('error', function(e) {
     console.log("Got error: " + e.message);
   });
-
-  var options = {
-    host: 'localhost',
-    port: 8080,
-    path: '/ldp/FH-Salzburg',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/ld+json',
-      'Slug': slug
-      // 'Content-Length': postData.length
-    }
-  };
 
 }
